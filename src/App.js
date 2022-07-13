@@ -1,24 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import Buscador from './components/Buscador';
+import NoticiaDetalle from './components/NoticiaDetalle';
+import {BrowserRouter, Routes, Route,} from "react-router-dom"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='' element= {<Buscador />}/>
+        <Route path='/buscador' element={<Buscador />}/>
+        <Route path='/noticia/:id' element={<NoticiaDetalle />}/>
+        <Route path='*' element={"Error 404: Not Found"}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
