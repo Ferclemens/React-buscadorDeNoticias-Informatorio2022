@@ -1,16 +1,16 @@
 import './App.css';
-import Buscador from './components/Buscador';
+import {BrowserRouter, Routes, Route, Navigate,} from "react-router-dom"
+import LandingPage from './components/LandingPage';
 import NoticiaDetalle from './components/NoticiaDetalle';
-import {BrowserRouter, Routes, Route,} from "react-router-dom"
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='' element= {<Buscador />}/>
-        <Route path='/buscador' element={<Buscador />}/>
-        <Route path='/noticia/:id' element={<NoticiaDetalle />}/>
+        <Route path='' element= {<LandingPage />}/>
+        <Route path='/buscador' element={<LandingPage />}/>
         <Route path='*' element={"Error 404: Not Found"}/>
+        <Route path='/error' element={<Navigate replace to='/buscador'/>}/>
       </Routes>
     </BrowserRouter>
   );

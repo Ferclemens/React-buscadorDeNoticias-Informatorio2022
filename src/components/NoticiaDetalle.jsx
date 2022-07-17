@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 
-function NoticiaDetalle({noticia}) {
+function NoticiaDetalle() {
+  const params = useParams()
+  console.log(params);
+  
+  useEffect(() => {
+    
+  },[])
+  
+  
   return (
     <div>
-      <h2>{noticia.title}</h2>
-      <img src={noticia.urlToImage}/>
-      <p>{noticia.description}</p>
+        <h1>{params.index}</h1>
+        <h2>title</h2>
+        <img src=''/>
+        <p>description</p>
     </div>
   )
 }

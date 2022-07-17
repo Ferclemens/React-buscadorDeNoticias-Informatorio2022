@@ -1,16 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import styles from '../components/NoticiaCard.module.css'
+import NoticiaDetalle from './NoticiaDetalle';
 
-function NoticiaCard({noticia}) {
+const NoticiaCard = (noticia) => {
+  //console.log(detalle);
   return (
-    <div>
-      <Link to={`/noticia/${noticia.id}`}>
-      <p>{noticia.source.name}</p>
-      <h2>{noticia.title}</h2>
-      <img src={noticia.urlToImage}/>
-      <p>{noticia.publishedAt}</p>
-      </Link>
-    </div>
+      <div className={styles.container}>
+        <p>{noticia.data.source.name}</p>
+        <h2>{noticia.data.title}</h2>
+        <img className={styles.img} src={noticia.data.urlToImage}/>
+        <p>{noticia.data.publishedAt}</p>
+      </div>
   )
 }
 

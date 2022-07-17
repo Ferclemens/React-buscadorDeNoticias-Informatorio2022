@@ -1,46 +1,63 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Buscador.module.css'
-import {APY_KEY, URL, LEN} from '../components/const/Const'
-import NoticiaCard from './NoticiaCard';
+import GetData from './GetData';
+import NoticiasList from './NoticiasList';
+import Loading from './Loading'
+import ErrorCatch from './ErrorCatch'
+import Paginado from './Paginado'
 
-
-function Buscador() {
-  //control de estado de input para busqueda
-  const [busqueda, setBusqueda] = useState('');
-  const [data, setData] = useState([])
+const Buscador = () => {
+  const [busqueda, setBusqueda] = useState('')
+  const [noticias, setNoticias] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [totalPaginas, setTotalPaginas] = useState(0)
+  const [pagina, setPagina] = useState(1)
 
   const onTextoChange = (e) => {
-    setBusqueda(e.target.value);
+    setBusqueda(e.target.value)
     //logica de condición para la busqueda (+ de 3 caracteres)
     if ((e.target.value).length > 2){
-      document.getElementById('submitButton').disabled = false;
+      document.getElementById('Button').hidden = false;
     } else {
-      document.getElementById('submitButton').disabled = true;
+      document.getElementById('Button').hidden = true;
     }
   }
-  //traemos los datos desde la API según busqueda
-  const onBuscar = async (e) => {
-      e.preventDefault()
-      await fetch(`${URL}?q=${busqueda}&apiKey=${APY_KEY}&page=1&pageSize=10&${LEN}`)
-      .then(response => response.json())
-      .then(data => {
-        const {articles} = data
-        setData(articles)
-      })
-    }
-    console.log(data);
+  console.log(busqueda);
+
+  const onBuscar = async () => {
+    const respuesta = await GetData(busqueda, pagina)
+    setNoticias(respuesta.articles)
+    const paginas = Math.ceil(parseInt(respuesta.totalResults)/10)
+    setTotalPaginas(paginas)
+  }
+  console.log(noticias);
+
+  const onChangePaginacion = async (event,value) => {
+    setPagina(value);
+  }
+  //console.log(pagina);
+  
+  useEffect(() => {
+    setLoading(true)
+    onBuscar()
+    setLoading(false)
+  },[pagina])
+
+  if (loading) {
+    return <Loading />
+  }
+
   return (
-    <section className={styles.box}>
-      <form className={styles.form} onSubmit={onBuscar}>
-        <input type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
-        <button id='submitButton' type='submit' disabled={true}>Buscar</button>
-      </form>
-      <div>
-        {data.map((noticia) => {
-          return <NoticiaCard key={noticia.id} noticia={noticia}/>
-        })}
-      </div>
-    </section>
-  );
+    <>
+      <section className={styles.box}>
+          <input type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
+          <button id='Button' hidden={false} onClick={onBuscar}>Buscar</button>
+      </section>
+      <section>
+          <NoticiasList noticias={noticias}/>
+          <Paginado page={pagina} count={totalPaginas} onChange={onChangePaginacion}/>
+      </section>
+    </>
+  )
 }
-export default Buscador
+export default Buscador;
