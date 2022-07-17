@@ -1,5 +1,22 @@
+/*
+    font-family: 'Roboto', sans-serif;
+
+    font-family: 'Roboto Condensed', sans-serif;
+*/
+
+.container {
+    background-color: rgb(73, 73, 73);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(255, 115, 36);
+}
 .loading {
     display: flex;
     align-items: center;
-    margin-top: 100px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 100px;
 }

@@ -9,7 +9,6 @@ const NoticiasList = ({noticias}) => {
       {noticias.map((noticia, index) => (
           <div key={index}>
             <NoticiaCard data={noticia} />
-            <a href={noticia.url} target="_blank" rel="noopener noreferrer">Ir a Noticia</a>
           </div>
           )
       )}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import styles from './ErrorCatch.module.css'
 
 export default class ErrorCatch extends React.Component {
   state = {
@@ -15,10 +16,9 @@ export default class ErrorCatch extends React.Component {
   render() {
     if(this.state.tieneError){
       return (
-        <div>
+        <div className={styles.container}>
           <h2>Se ha producido un error!</h2>
-          <img src="emogi" />
-          <p>tipo: {this.state.mensaje}</p>
+          <img className={styles.emogi} src="https://cdn-icons-png.flaticon.com/512/725/725099.png" />
           <Link to='/error'>Volver al Buscador</Link>
           <div>
             <Outlet />

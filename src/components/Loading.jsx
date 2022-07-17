@@ -1,13 +1,15 @@
 import React from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import styles from './Loading.module.css'
 
 function Loading() {
   return (
-    <Box className={styles.loading}>
-        <CircularProgress />
-    </Box>
+    <div className={styles.container}>
+        <div className={styles.loading}>
+          <CircularProgress color="inherit"/>
+          <h3>Loading...</h3>
+        </div>
+    </div>
   )
 }
 

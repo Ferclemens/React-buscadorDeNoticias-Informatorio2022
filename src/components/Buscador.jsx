@@ -5,11 +5,13 @@ import NoticiasList from './NoticiasList';
 import Loading from './Loading'
 import ErrorCatch from './ErrorCatch'
 import Paginado from './Paginado'
+import NoResults from './NoResults';
 
 const Buscador = () => {
   const [busqueda, setBusqueda] = useState('')
   const [noticias, setNoticias] = useState([])
   const [loading, setLoading] = useState(false);
+  const [noDataMessage, setNoDataMessage] = useState(false) 
   const [totalPaginas, setTotalPaginas] = useState(0)
   const [pagina, setPagina] = useState(1)
 
@@ -26,11 +28,16 @@ const Buscador = () => {
 
   const onBuscar = async () => {
     const respuesta = await GetData(busqueda, pagina)
-    setNoticias(respuesta.articles)
-    const paginas = Math.ceil(parseInt(respuesta.totalResults)/10)
-    setTotalPaginas(paginas)
+    if (respuesta.totalResults === 0) {
+      setNoDataMessage(true)
+    } else{
+      setNoticias(respuesta.articles)
+      const paginas = Math.ceil(parseInt(respuesta.totalResults)/10)
+      setTotalPaginas(paginas)
+    }
   }
   console.log(noticias);
+  console.log(noDataMessage);
 
   const onChangePaginacion = async (event,value) => {
     setPagina(value);
@@ -46,18 +53,21 @@ const Buscador = () => {
   if (loading) {
     return <Loading />
   }
+  if (noDataMessage) {
+    return <NoResults />
+  }
 
   return (
-    <>
-      <section className={styles.box}>
-          <input type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
-          <button id='Button' hidden={false} onClick={onBuscar}>Buscar</button>
-      </section>
-      <section>
+    <ErrorCatch>
+      <section className={styles.container}>
+          <input className={styles.input} type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
+          <button className={styles.button} id='Button' hidden={false} onClick={onBuscar}>Buscar</button>
+      </section> 
+      <section className={styles.noticiaList}>
           <NoticiasList noticias={noticias}/>
           <Paginado page={pagina} count={totalPaginas} onChange={onChangePaginacion}/>
       </section>
-    </>
+    </ErrorCatch>
   )
 }
-export default Buscador;
+export default React.memo(Buscador);
