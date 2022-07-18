@@ -1,7 +1,6 @@
 import './App.css';
 import {BrowserRouter, Routes, Route, Navigate,} from "react-router-dom"
 import LandingPage from './components/LandingPage';
-import NoticiaDetalle from './components/NoticiaDetalle';
 
 function App() {
   return (

@@ -11,7 +11,8 @@ const Buscador = () => {
   const [busqueda, setBusqueda] = useState('')
   const [noticias, setNoticias] = useState([])
   const [loading, setLoading] = useState(false);
-  const [noDataMessage, setNoDataMessage] = useState(false) 
+  const [noDataMessage, setNoDataMessage] = useState(false)
+  const [cantidadNoticias, setCantidadNoticias] = useState(0) 
   const [totalPaginas, setTotalPaginas] = useState(0)
   const [pagina, setPagina] = useState(1)
 
@@ -24,20 +25,24 @@ const Buscador = () => {
       document.getElementById('Button').hidden = true;
     }
   }
-  console.log(busqueda);
 
   const onBuscar = async () => {
     const respuesta = await GetData(busqueda, pagina)
+    //logica para determinar si mostramos los resultados o mensaje de NoResults
     if (respuesta.totalResults === 0) {
       setNoDataMessage(true)
     } else{
       setNoticias(respuesta.articles)
       const paginas = Math.ceil(parseInt(respuesta.totalResults)/10)
       setTotalPaginas(paginas)
+      setCantidadNoticias(respuesta.totalResults)
     }
   }
+  
+  console.log(busqueda);
   console.log(noticias);
   console.log(noDataMessage);
+  console.log(loading);
 
   const onChangePaginacion = async (event,value) => {
     setPagina(value);
@@ -60,14 +65,18 @@ const Buscador = () => {
   return (
     <ErrorCatch>
       <section className={styles.container}>
-          <input className={styles.input} type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
-          <button className={styles.button} id='Button' hidden={false} onClick={onBuscar}>Buscar</button>
+        <input className={styles.input} type='text' placeholder='Buscar noticias' onChange={onTextoChange}/>
+        <button className={styles.button} id='Button' hidden={true} onClick={onBuscar}>Buscar</button>
       </section> 
-      <section className={styles.noticiaList}>
+      {cantidadNoticias != 0 &&
+        <section className={styles.noticiaList}> 
+          <h5 className={styles.cantidadNoticias}>Está viendo 10 noticias de {cantidadNoticias} resultados</h5>
+          <Paginado className={styles.paginado} page={pagina} count={totalPaginas} onChange={onChangePaginacion}/>
           <NoticiasList noticias={noticias}/>
           <Paginado page={pagina} count={totalPaginas} onChange={onChangePaginacion}/>
-      </section>
+        </section>
+      }
     </ErrorCatch>
   )
 }
-export default React.memo(Buscador);
+export default Buscador;
