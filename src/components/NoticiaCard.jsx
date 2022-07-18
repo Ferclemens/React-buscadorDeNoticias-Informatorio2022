@@ -10,7 +10,7 @@ const NoticiaCard = (noticia) => {
         <div className={styles.child}>
           <img className={styles.img} src={noticia.data.urlToImage}/>
           <div className={styles.date}>
-            <h5>{`Publicado el: ${dt.day} ${dt.month} ${dt.year} a las ${dt.hour}:${dt.minute} hs.`}</h5>
+            <h5>{`Publicado el: ${dt.day} - ${dt.month} - ${dt.year} a las ${dt.hour}:${dt.minute} hs.`}</h5>
             <h5>Fuente: {noticia.data.source.name}</h5>
           </div>
         </div>

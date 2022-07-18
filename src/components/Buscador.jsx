@@ -39,10 +39,10 @@ const Buscador = () => {
     }
   }
   
-  console.log(busqueda);
-  console.log(noticias);
-  console.log(noDataMessage);
-  console.log(loading);
+  //console.log(busqueda);
+  //console.log(noticias);
+  //console.log(noDataMessage);
+  //console.log(loading);
 
   const onChangePaginacion = async (event,value) => {
     setPagina(value);
