@@ -4,7 +4,7 @@ import styles from './Loading.module.css'
 
 function Loading() {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} name='loading'>
         <div className={styles.loading}>
           <CircularProgress color="inherit"/>
           <h3>Loading...</h3>

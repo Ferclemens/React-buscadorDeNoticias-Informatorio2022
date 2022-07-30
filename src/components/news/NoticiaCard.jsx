@@ -1,4 +1,4 @@
-import styles from '../components/NoticiaCard.module.css'
+import styles from '../news/NoticiaCard.module.css'
 import { DateTime } from 'luxon';
 
 const NoticiaCard = (noticia) => {
@@ -6,7 +6,7 @@ const NoticiaCard = (noticia) => {
   //console.log(dt);
   //console.log(detalle);
   return (
-      <div className={styles.container}>
+      <div className={styles.container} role='noticia'>
         <div className={styles.child}>
           <img className={styles.img} src={noticia.data.urlToImage}/>
           <div className={styles.date}>
@@ -17,7 +17,7 @@ const NoticiaCard = (noticia) => {
         <div className={styles.child}>
           <h2>{noticia.data.title}</h2>
           <p>{noticia.data.description}</p>
-          <a href={noticia.data.url} target="_blank" rel="noopener noreferrer">Ir a Noticia</a>
+          <a className={styles.anchor} href={noticia.data.url} target="_blank" rel="noopener noreferrer">Ir a Noticia</a>
         </div>
       </div>
   )

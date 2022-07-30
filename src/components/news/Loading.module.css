@@ -12,6 +12,9 @@
     flex-direction: column;
     font-family: 'Roboto Condensed', sans-serif;
     color: rgb(255, 115, 36);
+    box-sizing: content-box;
+    width: 100%;
+    height: 433px;
 }
 .loading {
     display: flex;

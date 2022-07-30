@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route, Navigate,} from "react-router-dom"
 import LandingPage from './components/LandingPage';
-import NoMatch404 from './components/NoMatch404';
+import NoMatch404 from './components/errors/NoMatch404';
 
 function App() {
   return (

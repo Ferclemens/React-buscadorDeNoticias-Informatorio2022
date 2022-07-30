@@ -19,7 +19,7 @@ export default class ErrorCatch extends React.Component {
         <div className={styles.container}>
           <h1>Se ha producido un error!</h1>
           <img className={styles.emogi} src="https://cdn-icons-png.flaticon.com/512/725/725099.png" />
-          <Link to='/error'>Volver al Buscador</Link>
+          <Link className={styles.link} to='/error'>Volver al Buscador</Link>
           <div>
             <Outlet />
           </div> 

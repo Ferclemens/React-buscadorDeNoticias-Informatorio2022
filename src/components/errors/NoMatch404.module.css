@@ -21,3 +21,19 @@
     font-family: 'Roboto', sans-serif;
     font-size: 900;
 }
+.link {
+    margin: 60px;
+    padding: 5px 130px;
+    border: 1px solid rgb(255, 115, 36);
+    text-decoration: none;
+    background-color: #333;
+    color: rgb(255, 115, 36);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600;
+    box-shadow: rgb(255, 171, 124) -4px 4px 0px 0px;
+    border-radius: 2px;
+}
+.link:hover {
+    color: rgb(40, 40, 40);
+    background-color: rgb(255, 115, 36);
+}

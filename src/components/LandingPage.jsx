@@ -1,5 +1,4 @@
 import Buscador from './Buscador'
-import { ErrorCatch } from './ErrorCatch'
 import Footer from './Footer'
 import Header from './Header'
 
