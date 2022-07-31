@@ -26,12 +26,13 @@ const Buscador = () => {
     }
   }
 
+
   const onBuscar = async() => {
     setLoading(true)
     const respuesta =  await GetData(busqueda, pagina)
     //logica para determinar si mostramos los resultados o mensaje de NoResults
     if (respuesta === undefined) {
-      console.log("primera busqueda vacia de renderizado componente Buscador");
+      setNoticias([])
     } else if (respuesta.totalResults === 0) {
         setNoDataMessage(true)
     } else{
@@ -67,10 +68,10 @@ const Buscador = () => {
 
   return (
     <ErrorCatch>
-      <section className={ cantidadNoticias ? styles.containerRedux : styles.container } >
-        <input className={styles.input} type='text' placeholder='Buscar noticias' onChange={onTextoChange} name='input'/>
-        <button className={styles.button} id='button' hidden={true} onClick={onBuscar} name='buttonBuscar'>Buscar</button>
-      </section> 
+      <form className={ cantidadNoticias ? styles.containerRedux : styles.container } onSubmit={onBuscar} >
+        <input className={styles.input} type='text' placeholder='Buscar noticias' onChange={onTextoChange} name='input' autoComplete="off"/>
+        <button className={styles.button} id='button' hidden={true} name='buttonBuscar' type='submit'>Buscar</button>
+      </form> 
       {cantidadNoticias != null &&
         <section className={styles.noticiaList}> 
           <h5 className={styles.cantidadNoticias}>Estas viendo {cantidadNoticias < 10 ? cantidadNoticias : 10} noticias de {cantidadNoticias} resultados</h5>
