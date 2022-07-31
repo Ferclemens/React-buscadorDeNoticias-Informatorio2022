@@ -26,7 +26,6 @@ const Buscador = () => {
     }
   }
 
-
   const onBuscar = async() => {
     setLoading(true)
     const respuesta =  await GetData(busqueda, pagina)
